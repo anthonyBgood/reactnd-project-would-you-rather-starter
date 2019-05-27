@@ -1,6 +1,6 @@
 export const SET_AUTHED_USER  = 'AUTHED_USER'
 
-export default function receiveAuthedUser (id){
+export default function addAuthedUser (id){
   return{
     type: SET_AUTHED_USER ,
     id,

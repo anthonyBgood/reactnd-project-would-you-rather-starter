@@ -1,7 +1,16 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  height: 90%;
 }
+/* a good contrasting color to use
+    background-color: #c71d17; */
+
+  .bottom-flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: DodgerBlue;
+  }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

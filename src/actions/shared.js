@@ -1,11 +1,11 @@
 import { getInitialData } from '../utils/api'
 import { receiveUsers } from '../actions/users'
 import { receiveQuestions } from '../actions/questions'
-import receiveAuthedUser from '../actions/authedUser'
+//import addAuthedUser from '../actions/authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 //TODO: change to login process
-const AUTHED_ID = 'tylermcginnis'
+//const AUTHED_ID = 'tylermcginnis'
 
 
 export function handleInitialData (users, questions){
@@ -18,7 +18,7 @@ export function handleInitialData (users, questions){
           ({users, questions}) =>{
             dispatch(receiveUsers(users))
             dispatch(receiveQuestions(questions))
-            dispatch(receiveAuthedUser(AUTHED_ID))
+            //dispatch(addAuthedUser(AUTHED_ID))
             dispatch(hideLoading())
           })
     }

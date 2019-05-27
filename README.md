@@ -53,17 +53,17 @@ Your code will talk to the database via 4 methods:
 * `_saveQuestion(question)`
 * `_saveQuestionAnswer(object)`
 
-1) `_getUsers()` Method
+1 `_getUsers()` Method
 
 *Description*: Get all of the existing users from the database.  
 *Return Value*: Object where the key is the user’s id and the value is the user object.
 
-2) `_getQuestions()` Method
+2 `_getQuestions()` Method
 
 *Description*: Get all of the existing questions from the database.  
 *Return Value*: Object where the key is the question’s id and the value is the question object.
 
-3) `_saveQuestion(question)` Method
+3 `_saveQuestion(question)` Method
 
 *Description*: Save the polling question in the database.  
 *Parameters*:  Object that includes the following properties: `author`, `optionOneText`, and `optionTwoText`. More details about these properties:
