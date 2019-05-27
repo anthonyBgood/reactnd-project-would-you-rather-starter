@@ -1,39 +1,46 @@
 // from create react
-import logo from '../styles/logo.svg';
+
 import '../styles/App.css';
 
 import React, { Component, Fragment } from 'react'
 //import { BrowserRouter as Router, Route } from 'react-router-dom'
-//import { connect } from 'react-redux'
-//import LoadingBar from 'react-redux-loading'
+import { connect } from 'react-redux'
+import LoadingBar from 'react-redux-loading'
+
+
+import { handleInitialData } from '../actions/shared'
+import Introduction from '../components/Introduction'
 
 
 class App extends Component {
 
+  componentDidMount(){
+    this.props.dispatch(handleInitialData())
+  }
 
   render(){
     return(
-      <div className="App">
-        <header className="App-header">
-          <h2>
-            Anthony's 
-          </h2>
-          <h2>
-            Would you Rather?
-          </h2>
-          <p className='Framework-declaration'>
-              React/Redux
-          </p>
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Please select a user to start
-          </p>
-        </header>
+      <div id='opener' className="App">
+        <LoadingBar />
+
+        {
+          this.props.loading === true
+          ? null
+          : <div>
+              <Introduction />
+            </div> 
+        }
+        
       </div>
     )
   
   }
 }
 
+function MapStateToProps({authedUser}){
+  return{
+    loading: authedUser === null
+  }
+}
 
-export default App;
+export default connect(MapStateToProps)(App)

@@ -4,9 +4,9 @@ const logger =  (store) => (next) => (action) =>{
     console.log('the action: ', action.type)
     const returnValue = next(action)
     console.log('new state: ', store.getState())
+
     
   console.groupEnd()
-  
   return returnValue
 }
 

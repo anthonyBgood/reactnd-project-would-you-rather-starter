@@ -15,9 +15,9 @@ export function handleInitialData (users, questions){
       dispatch(showLoading())
       return getInitialData()
         .then(
-          ({users, tweets}) =>{
+          ({users, questions}) =>{
             dispatch(receiveUsers(users))
-            dispatch(receiveQuestions(tweets))
+            dispatch(receiveQuestions(questions))
             dispatch(receiveAuthedUser(AUTHED_ID))
             dispatch(hideLoading())
           })
