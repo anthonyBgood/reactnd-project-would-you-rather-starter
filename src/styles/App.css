@@ -1,16 +1,12 @@
+
+
 .App {
   text-align: center;
   height: 90%;
-}
-/* a good contrasting color to use
-    background-color: #c71d17; */
 
-  .bottom-flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: DodgerBlue;
-  }
+
+}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -40,4 +36,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* a good contrasting color to use
+    background-color: #c71d17; */
+
+    .base-app {
+      width: 100%;
+      height:100%;
+      background-color: #282c34; 
+  
+  
+    }
+
+.base-component{
+  background-color: #f1f1f1;
+  color: black;
+  width: 90%;
+  height:90%;
+  margin-top: 5%;
+  margin-left: 5%;
 }

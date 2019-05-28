@@ -2,7 +2,7 @@
 
 import '../styles/App.css';
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 //import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
@@ -10,6 +10,7 @@ import LoadingBar from 'react-redux-loading'
 
 import { handleInitialData } from '../actions/shared'
 import Introduction from '../components/Introduction'
+import Home from '../components/Home'
 
 
 
@@ -21,7 +22,7 @@ class App extends Component {
 
   render(){
     return(
-      <div>
+      <div className='base-app'>
         
 
         <LoadingBar />
@@ -29,9 +30,10 @@ class App extends Component {
          {
           this.props.loading === true
           ? null
-          : <div>
-              <Introduction />
-            </div> 
+          : <Fragment>
+              {/*<Introduction />*/}
+              <Home />
+            </Fragment> 
         } 
         
       </div>
