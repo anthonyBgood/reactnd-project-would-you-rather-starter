@@ -33,9 +33,9 @@ class App extends Component {
           ? null
           : <Fragment>
               {/*<Introduction />*/}
-              {/* <Home /> */}
+              <Home />
 
-              <Question showResults ={false} id ={'6ni6ok3ym7mf1p33lnez'} />
+              {/* <Question showResults ={false} id ={'loxhs1bqm25b708cmbf3g'} /> */}
             </Fragment> 
         } 
         
