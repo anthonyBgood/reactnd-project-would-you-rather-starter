@@ -11,6 +11,7 @@ import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from '../actions/shared'
 import Introduction from '../components/Introduction'
 import Home from '../components/Home'
+import Question from '../components/Question'
 
 
 
@@ -32,7 +33,9 @@ class App extends Component {
           ? null
           : <Fragment>
               {/*<Introduction />*/}
-              <Home />
+              {/* <Home /> */}
+
+              <Question showResults ={false} id ={'6ni6ok3ym7mf1p33lnez'} />
             </Fragment> 
         } 
         

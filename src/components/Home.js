@@ -30,38 +30,43 @@ class Home extends Component{
           Unanswered
         </button>
 
-
         <div>
-          {listAnswered?'SHOW ANSWERED':'DO NOT SHOW ANSWERED'}
+          {listAnswered?'SHOW ANSWERED':'SHOW NOT ANSWERED'}
         </div>
 
         <ul>
-          {this.props.questionIds.map((id) =>(
-            <li key={id}>
-              
-
-              < Question id={id}/>
+          {this.props.questionsList.map((q) =>(
+            
+            listAnswered === q.answered &&
+            
+            <li key={q.id}>  
+              < Question showResults = {false} id= {q.id}  />
             </li>
+
           ))}
         </ul>
-
-
-
-
       </div>
     )
   }
 }
 
-function mapStateToProps({questions}){
+function mapStateToProps({authedUser, users, questions}){
+
+  let answered =[]
+  authedUser !== null && (answered = Object.keys(users[authedUser]['answers']))
+
+  const questionsList = Object.keys(questions).map(
+    (id)=> (
+      {
+        id,
+        answered: answered.includes(id)
+      }
+    ))
 
   return {
-
-    questionIds: Object.keys(questions)
-
+    questionsList
   }
 
 }
-
 
 export default connect(mapStateToProps)(Home)
