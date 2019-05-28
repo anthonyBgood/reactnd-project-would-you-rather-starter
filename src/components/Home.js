@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import Question from '../components/Question'
 
 
 class Home extends Component{
@@ -32,6 +35,16 @@ class Home extends Component{
           {listAnswered?'SHOW ANSWERED':'DO NOT SHOW ANSWERED'}
         </div>
 
+        <ul>
+          {this.props.questionIds.map((id) =>(
+            <li key={id}>
+              
+
+              < Question id={id}/>
+            </li>
+          ))}
+        </ul>
+
 
 
 
@@ -40,5 +53,15 @@ class Home extends Component{
   }
 }
 
+function mapStateToProps({questions}){
 
-export default Home
+  return {
+
+    questionIds: Object.keys(questions)
+
+  }
+
+}
+
+
+export default connect(mapStateToProps)(Home)
