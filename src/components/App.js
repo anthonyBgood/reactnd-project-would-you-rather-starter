@@ -9,10 +9,11 @@ import LoadingBar from 'react-redux-loading'
 
 
 import { handleInitialData } from '../actions/shared'
-import Introduction from '../components/Introduction'
-import Home from '../components/Home'
+
+//import Introduction from '../components/Introduction'
+//import Home from '../components/Home'
 import Question from '../components/Question'
-import NewQuestion from '../components/NewQuestion'
+//import NewQuestion from '../components/NewQuestion'
 
 
 
@@ -36,9 +37,9 @@ class App extends Component {
               {/*<Introduction />*/}
               {/* <Home /> */}
 
-              {/* <Question showResults ={false} id ={'loxhs1bqm25b708cmbf3g'} />  */}
+              <Question showResults ={false} id ={'vthrdm985a262al8qx3do'} /> 
 
-              <NewQuestion />
+              {/* <NewQuestion /> */}
             </Fragment> 
         } 
         

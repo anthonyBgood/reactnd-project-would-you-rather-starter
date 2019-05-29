@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
+import {OPTION_ONE, OPTION_TWO, handlePreferenceRecord} from '../actions/questions'
+
 
 class Question extends Component {
 
@@ -9,6 +11,25 @@ class Question extends Component {
   formatDate (timestamp) {
     const d = new Date(timestamp)
     return d.toLocaleDateString()
+  }
+
+
+  recordPreference (e) {
+      
+    e.preventDefault()
+    const optionPreference = e.target.name
+    const {dispatch, userAnswered, question , authedUser} =  this.props 
+
+    /* const info = { authedUser, qid: question.id , answer: optionPreference }
+    console.log('recordPreference: ',userAnswered, info)  */
+
+    userAnswered
+    ? alert("you have already voted in this poll")
+    : dispatch(handlePreferenceRecord({ 
+        authedUser, 
+        qid: question.id , 
+        answer: optionPreference }))
+
   }
 
   render(){
@@ -23,7 +44,7 @@ class Question extends Component {
     } =  this.props 
 
 
-    //const {name, avatar, } = author
+
 
 
     return (
@@ -49,13 +70,19 @@ class Question extends Component {
             </div>
             <div className='question-wouldYouRather'>
 
-              <button className='wouldYouRather-options'>
+              <button 
+                className='wouldYouRather-options'
+                name={OPTION_ONE} 
+                onClick={(e)=> this.recordPreference(e)}>
                 {question.optionOne.text}
               </button>
               <div className='wouldYouRather-or'> 
                OR
                </div>
-              <button className='wouldYouRather-options'>
+              <button                 
+                className='wouldYouRather-options'
+                name={OPTION_TWO}
+                onClick={(e)=> this.recordPreference(e)}>
                 {question.optionTwo.text}
               </button>
 
@@ -134,7 +161,8 @@ function mapStateToProps({authedUser, users, questions},{id, showResults}){
       question ,
       author ,
       userAnswered , 
-      voteHistory ,
+      voteHistory , 
+      authedUser ,
       
     }
   )
