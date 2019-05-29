@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {handleNewQuestion} from '../actions/questions' 
 
 
 
@@ -7,9 +8,11 @@ class NewQuestion extends Component {
 
 
   state ={
-    optionOne: '',
-    optionTwo: '', 
+    
+    optionOneText: '', 
+    optionTwoText: '',
   }
+
 
   handleChange = (e) => {
 
@@ -28,13 +31,14 @@ class NewQuestion extends Component {
     e.preventDefault()
 
     const { dispatch, authedUser } = this.props
+    const {optionOneText, optionTwoText} = this.state
 
-    const {optionOne, optionTwo} = this.state
+    
     dispatch(handleNewQuestion({
       
-      optionOneText: optionOne, 
-      optionTwoText: optionTwo, 
-      author: authedUser
+      optionOneText , 
+      optionTwoText , 
+      author: authedUser ,
       }))
 
     
@@ -50,23 +54,23 @@ class NewQuestion extends Component {
 
         <form className='form-base-component' onSubmit ={this.handleSubmit}>
 
-          <label for="optionOne">Option One</label>
+          <label for="optionOneText">Option One</label>
           <input 
             onChange={this.handleChange}
             className='inputItems' 
-            type="text" id='optionOne' 
-            name='optionOne' 
+            type="text" id='optionOneText' 
+            name='optionOneText' 
             placeholder='enter option one' >
 
             </input>
 
-          <label for="optionTwo">Option Two</label>
+          <label for="optionTwoText">Option Two</label>
           <input 
             onChange={this.handleChange}
             className='inputItems' 
             type="text" 
-            id='optionTwo' 
-            name='optionTwo' 
+            id='optionTwoText' 
+            name='optionTwoText' 
             placeholder='enter option two' ></input>
 
           <button type='submit' className='inputItems'>
@@ -81,5 +85,12 @@ class NewQuestion extends Component {
   }
 }
 
-export default connect()(NewQuestion)
+function mapStateToProps(state){
+
+  const {authedUser } = state
+  return{authedUser}
+}
+
+
+export default connect(mapStateToProps)(NewQuestion)
 

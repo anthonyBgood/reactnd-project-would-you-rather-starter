@@ -10,17 +10,11 @@ export default function questions (state ={}, action){
       }
 
     case SAVE_NEW_QUESTION :
-      return {
-
-        questions = {
-          ...questions,
-          [question.id]: question
-        }
-        
-
-
-
+      return{
+        ...state ,
+        [action.question.id]: action.question ,
       }
+
     default :
       return state
   }

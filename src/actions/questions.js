@@ -26,9 +26,11 @@ export function handleNewQuestion(question){
 
     dispatch(showLoading())
 
-    return saveNewQuestion({question})
+    return saveNewQuestion(question)
       .then((question)=>(dispatch(saveQuestionInState(question))))
-      .then(()=>(dispatch(hideLoading)))
+      .then(()=>(dispatch(hideLoading())))
+
+  }
 
 
 }
