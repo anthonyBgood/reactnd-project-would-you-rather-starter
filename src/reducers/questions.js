@@ -1,4 +1,4 @@
-import {RECEIVE_QUESTIONS} from '../actions/questions'
+import {RECEIVE_QUESTIONS, SAVE_NEW_QUESTION} from '../actions/questions'
 
 
 export default function questions (state ={}, action){
@@ -7,6 +7,19 @@ export default function questions (state ={}, action){
       return {
         ...state,
         ...action.questions
+      }
+
+    case SAVE_NEW_QUESTION :
+      return {
+
+        questions = {
+          ...questions,
+          [question.id]: question
+        }
+        
+
+
+
       }
     default :
       return state
