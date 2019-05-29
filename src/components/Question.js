@@ -36,6 +36,7 @@ class Question extends Component {
           
           <div>
             <div className='question-title'>
+
               <div> 
                 {author.name} asked on {this.formatDate(question.timestamp)} would you rather?
               </div>
@@ -44,15 +45,19 @@ class Question extends Component {
                 alt={`Avatar of ${author.name}`}
                 className='avatar'
               />
+
             </div>
-            <div className='question-options'>
-              <div>
+            <div className='question-wouldYouRather'>
+
+              <button className='wouldYouRather-options'>
                 {question.optionOne.text}
-              </div>
-              <h3>OR</h3>
-              <div>
+              </button>
+              <div className='wouldYouRather-or'> 
+               OR
+               </div>
+              <button className='wouldYouRather-options'>
                 {question.optionTwo.text}
-              </div>
+              </button>
 
             </div>
           
@@ -63,19 +68,19 @@ class Question extends Component {
 
         
 
-        <div> 
-          <p>
+        <div className='question-results'> 
+          <div>
             showResults: {showResults?'yes':'no'} 
-          </p>
-          <p>
+          </div>
+          <div>
             percentage option1: {voteHistory.percentageOption1}
-          </p>
-          <p>
+          </div>
+          <div>
             total votes: {voteHistory.totalVotes}
-          </p>
-          <p>
+          </div>
+          <div>
             authedUser choice: {userAnswered}
-          </p>
+          </div>
         </div>
     
       </div>

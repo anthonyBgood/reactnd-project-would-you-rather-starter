@@ -30,11 +30,11 @@ class Home extends Component{
           Unanswered
         </button>
 
-        <div>
+        <span>
           {listAnswered?'SHOW ANSWERED':'SHOW NOT ANSWERED'}
-        </div>
+        </span>
 
-        <ul>
+        <ul className='question-list'>
           {this.props.questionsList.map((q) =>(
             
             listAnswered === q.answered &&

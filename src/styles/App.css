@@ -42,21 +42,21 @@
 /* a good contrasting color to use
     background-color: #c71d17; */
 
-    .base-app {
-      width: 100%;
-      height:100%;
-      background-color: #282c34; 
-  
-  
-    }
+.base-app {
+  /* width: 100%; */
+  height:100%; 
+  background-color: #282c34; 
+}
 
 .base-component{
   background-color: #f1f1f1;
   color: black;
   width: 90%;
-  height:90%;
+  height:90%; 
   margin-top: 5%;
   margin-left: 5%;
+  overflow: auto
+
 }
 
 .question-base-component{
@@ -70,4 +70,86 @@
   height: 50px;
   border-radius: 25px;
   margin: 10px;
+}
+
+.question-list{
+  list-style-type:none; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.question-base-component{
+  border: 3px solid black;
+  margin-bottom: 10px;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.question-title{
+  border: 1px solid black;
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.question-wouldYouRather{
+  border: 1px solid black;
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  
+}
+
+
+.question-wouldYouRather>div{
+  flex-grow: 1;
+  margin: auto; 
+  text-align: center;
+}
+
+.question-wouldYouRather>button{
+  flex-grow: 3;
+  margin: auto; 
+  text-align: center;
+  height: 100px;
+}
+
+
+.question-results{
+  border: 1px solid black;
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+}
+
+.question-results>div{
+  border: 1px solid #eeede9; 
+  background-color: #eeede9 ;
+}
+
+
+.form-base-component{
+
+  border: 3px solid black;
+  margin: 10px;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+
+}
+
+.inputItems {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }

@@ -12,6 +12,7 @@ import { handleInitialData } from '../actions/shared'
 import Introduction from '../components/Introduction'
 import Home from '../components/Home'
 import Question from '../components/Question'
+import NewQuestion from '../components/NewQuestion'
 
 
 
@@ -33,9 +34,11 @@ class App extends Component {
           ? null
           : <Fragment>
               {/*<Introduction />*/}
-              <Home />
+              {/* <Home /> */}
 
-              {/* <Question showResults ={false} id ={'loxhs1bqm25b708cmbf3g'} /> */}
+              {/* <Question showResults ={false} id ={'loxhs1bqm25b708cmbf3g'} />  */}
+
+              <NewQuestion />
             </Fragment> 
         } 
         
