@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import logo from '../styles/logo.svg';
 
-import addAuthedUser from '../actions/authedUser'
+import { addAuthedUser, logOutAuthedUser } from '../actions/authedUser'
+
 
 class Introduction extends Component {
 
@@ -16,17 +16,23 @@ class Introduction extends Component {
     this.props.dispatch(addAuthedUser(id))
   }
 
+  logoutUser = (e) =>{
+    e.preventDefault()
+    this.props.dispatch(logOutAuthedUser())
+  }
+
 
 
   render(){
+
+    const {authedUser, authedUserRecord} = this.props
+
 
     return(
 
       <div className="App">
           <header className="App-header">
-            <h2>
-              Anthony's 
-            </h2>
+
             <h2>
               Would you Rather?
             </h2>
@@ -34,27 +40,48 @@ class Introduction extends Component {
                 React/Redux
             </p>
             <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Please select an avatar to start
-            </p>
 
-            <form >
-              <select 
-                onChange={(e)=> this.setAuthedUser(e)}
-                key={this.props.userIds} 
-                >
-                {
-                  this.props.userIds.map(
-                    (id) =>(
-                      <option 
-                         
-                        key={id} 
-                        value={[id]}>{id}</option>
-                    ))
-                }
+            {
+              authedUser === null
+              ? <div>
+                  <p>  
+                    Please select an avatar to start
+                  </p>
+                  <form >
+                    <select 
+                      className='user-select'
+                      onChange={(e)=> this.setAuthedUser(e)}
+                      key={this.props.userIds} 
+                      >
+                      {
+                        this.props.userIds.map(
+                          (id) =>(
+                            <option 
+                              
+                              key={id} 
+                              value={[id]}>{id}</option>
+                          ))
+                      }
+                    </select>
+                  </form>
+                </div>
+              : 
+                <div>
+                  <p>Welcome {authedUserRecord.name }</p>
+                  
+                  <img 
+                  src={authedUserRecord.avatarURL}
+                  alt={`Avatar of ${authedUserRecord.name}`}
+                  className='avatar-small'
+                  />
+                  
+                  <button onClick={this.logoutUser}>
+                    Log Out
+                  </button>
+                </div>
+                
+            }
 
-              </select>
-            </form>
           </header>
         </div>
 
@@ -62,11 +89,15 @@ class Introduction extends Component {
   }
 }
 
-function mapStateToProps({users}){
+function mapStateToProps({users, authedUser}){
 
   return{
+    
     userIds: Object.keys(users)
-              .sort((a,b) => users[a].name<users[b].name?-1:1)
+              .sort((a,b) => users[a].name<users[b].name?-1:1) ,
+    
+    authedUser,
+    authedUserRecord:users[authedUser],
   }
 }
 

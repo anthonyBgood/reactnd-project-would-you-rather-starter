@@ -3,17 +3,18 @@
 import '../styles/App.css';
 
 import React, { Component, Fragment } from 'react'
-//import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 
 
 import { handleInitialData } from '../actions/shared'
 
-//import Introduction from '../components/Introduction'
-//import Home from '../components/Home'
+import Introduction from '../components/Introduction'
+import Nav from '../components/Nav'
+import Home from '../components/Home'
 import Question from '../components/Question'
-//import NewQuestion from '../components/NewQuestion'
+import NewQuestion from '../components/NewQuestion'
 
 
 
@@ -25,34 +26,47 @@ class App extends Component {
 
   render(){
     return(
-      <div className='base-app'>
-        
+      <Router>
+        <div className='base-app'>
+          
+          <LoadingBar />
 
-        <LoadingBar />
+          {
+            this.props.loading === true
+            ? null
 
-         {
-          this.props.loading === true
-          ? null
-          : <Fragment>
-              {/*<Introduction />*/}
-              {/* <Home /> */}
+            :this.props.loggedIn !== true
 
-              <Question showResults ={false} id ={'vthrdm985a262al8qx3do'} /> 
+            ?<Fragment>
+                <Nav/>
+                <Introduction/>
+              </Fragment>
 
-              {/* <NewQuestion /> */}
-            </Fragment> 
-        } 
-        
-      </div>
+            : <Fragment>
+
+                <Nav/>
+                <Route path='/' exact component={Home} />
+                <Route path='/authenticate/' component={Introduction} />
+                <Route path='/new/' component={NewQuestion} />
+                <Route path='/question/:id' component={Question}/>
+
+                {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> */}
+                
+                </Fragment> 
+          } 
+          
+        </div>
+      </Router>
     )
   
   }
 }
 
-function MapStateToProps({users}){
+function MapStateToProps({users, authedUser}){
 
   return{
-    loading: Object.keys(users).length === 0
+    loading: Object.keys(users).length === 0 , 
+    loggedIn: authedUser !== null ,
   }
 }
 
