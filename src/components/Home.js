@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Question from '../components/Question'
+import QuestionList from '../components/QuestionList'
 
 
 class Home extends Component{
@@ -40,7 +41,7 @@ class Home extends Component{
             listAnswered === q.answered &&
             
             <li key={q.id}>  
-              < Question showResults = {false} id= {q.id}  />
+              < QuestionList id= {q.id}  />
             </li>
 
           ))}

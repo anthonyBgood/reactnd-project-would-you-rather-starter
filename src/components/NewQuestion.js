@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+//import { Redirect } from 'react-router-dom'
+
 import {handleNewQuestion} from '../actions/questions' 
 
 
@@ -41,12 +43,17 @@ class NewQuestion extends Component {
       author: authedUser ,
       }))
 
+
+      this.props.history.push('/')
+
     
   }
 
   render(){
 
-
+/*     if(toHome === true){
+      return <Redirect to='/' />
+    } */
 
     return(
 
@@ -54,7 +61,7 @@ class NewQuestion extends Component {
 
         <form className='form-base-component' onSubmit ={this.handleSubmit}>
 
-          <label for="optionOneText">Option One</label>
+          <label htmlFor="optionOneText">Option One</label>
           <input 
             onChange={this.handleChange}
             className='inputItems' 
@@ -64,7 +71,7 @@ class NewQuestion extends Component {
 
             </input>
 
-          <label for="optionTwoText">Option Two</label>
+          <label htmlFor="optionTwoText">Option Two</label>
           <input 
             onChange={this.handleChange}
             className='inputItems' 

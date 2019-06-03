@@ -67,14 +67,15 @@ class Introduction extends Component {
                 </div>
               : 
                 <div>
-                  <p>Welcome {authedUserRecord.name }</p>
-                  
-                  <img 
-                  src={authedUserRecord.avatarURL}
-                  alt={`Avatar of ${authedUserRecord.name}`}
-                  className='avatar-small'
-                  />
-                  
+                  <div className='logout'>
+                    <p> {authedUserRecord.name }</p>
+                    
+                    <img 
+                    src={authedUserRecord.avatarURL}
+                    alt={`Avatar of ${authedUserRecord.name}`}
+                    className='avatar-small'
+                    /> 
+                  </div>
                   <button onClick={this.logoutUser}>
                     Log Out
                   </button>
@@ -98,6 +99,7 @@ function mapStateToProps({users, authedUser}){
     
     authedUser,
     authedUserRecord:users[authedUser],
+    
   }
 }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
 import {OPTION_ONE, OPTION_TWO, handlePreferenceRecord} from '../actions/questions'
+import QuestionHeader from '../components/QuestionHeader'
 
 
 class Question extends Component {
@@ -35,6 +36,7 @@ class Question extends Component {
   render(){
 
     const {
+      id, 
       showResults , 
       question ,
       author ,
@@ -56,18 +58,8 @@ class Question extends Component {
 
           
           <div>
-            <div className='question-title'>
+            <QuestionHeader id={id} />
 
-              <div> 
-                {author.name} asked on {this.formatDate(question.timestamp)} would you rather?
-              </div>
-              <img 
-                src={author.avatarURL}
-                alt={`Avatar of ${author.name}`}
-                className='avatar'
-              />
-
-            </div>
             <div className='question-wouldYouRather'>
 
               <button 
@@ -116,8 +108,12 @@ class Question extends Component {
 }
 
 
-function mapStateToProps({authedUser, users, questions},{id, showResults}){
+function mapStateToProps({authedUser, users, questions},props){
 
+  
+  //{id, showResults}
+  const { id, showResults } = props.match.params
+  
   const question = questions[id]
 
    //DEV: problems with seeking before state populated
@@ -157,6 +153,7 @@ function mapStateToProps({authedUser, users, questions},{id, showResults}){
 
   return(
     {
+      id ,
       showResults , 
       question ,
       author ,

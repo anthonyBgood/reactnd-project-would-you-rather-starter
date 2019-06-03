@@ -104,6 +104,12 @@
 
 }
 
+.flex-column{
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .question-wouldYouRather{
   border: 1px solid black;
   display: flex; 
@@ -167,7 +173,8 @@
 
 .navBar {
   display: flex; 
-  flex-direction: column; 
+  flex-direction: row; 
+  justify-content: space-between;
   background-color: rgb(239, 239, 240);
 }
 
@@ -179,6 +186,7 @@
   justify-content: flex-start;
   align-items: stretch;
   list-style-type: none;
+
  /*  background-color: rgb(31, 31, 122); */
 
 }
@@ -191,5 +199,12 @@
   margin:2px;
   text-align: center;
   background-color: #8b5452;
+
+
 }
 
+
+.logout{
+  display: flex;
+  
+}
