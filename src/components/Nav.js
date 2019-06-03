@@ -20,10 +20,13 @@ render(){
           </div>
         </Link>
 
+        <Link to='/leaderboard/'>
+
           <div className='menu-item'>
-            Play
+          leader board
           </div>
-          
+        </Link>
+
         <Link to='/new/' activeClassName='active'>
           <div className='menu-item'>
             Contribute

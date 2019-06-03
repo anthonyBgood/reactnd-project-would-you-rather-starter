@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+
 
 
 class QuestionHeader extends Component{
@@ -39,7 +39,7 @@ class QuestionHeader extends Component{
 }
 
 
-function mapStateToProps({questions,users},{id}){
+/* function mapStateToProps({questions,users},{id}){
 
   const question =  questions[id] 
   const userAuthor = users[question.author]
@@ -52,6 +52,6 @@ function mapStateToProps({questions,users},{id}){
       }
     )
 }
+ */
 
-
-export default connect(mapStateToProps)(QuestionHeader)
+export default QuestionHeader

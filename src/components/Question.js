@@ -58,7 +58,13 @@ class Question extends Component {
 
           
           <div>
-            <QuestionHeader id={id} />
+           
+
+            <QuestionHeader 
+              name={author.name} 
+              timestamp={question.timestamp}
+              avatarURL={author.avatarURL}
+              />
 
             <div className='question-wouldYouRather'>
 

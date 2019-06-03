@@ -15,6 +15,7 @@ import Nav from '../components/Nav'
 import Home from '../components/Home'
 import Question from '../components/Question'
 import NewQuestion from '../components/NewQuestion'
+import LeaderBoard from '../components/LeaderBoard'
 
 
 
@@ -49,6 +50,7 @@ class App extends Component {
                 <Route path='/authenticate/' component={Introduction} />
                 <Route path='/new/' component={NewQuestion} />
                 <Route path='/question/:id' component={Question}/>
+                <Route path='/leaderboard/' component={LeaderBoard}/>
 
                 {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> */}
                 

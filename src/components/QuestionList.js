@@ -24,30 +24,15 @@ class QuestionList extends Component {
         <div className='question-base-component'>
           
           <div>
-            <QuestionHeader id={id} />
+           {/*  <QuestionHeader id={id} /> */}
 
-
-  {/*               <div className='question-title'>
-
-              <div className='flex-column'>
-              <div> 
-                {author.name} asked on {this.formatDate(question.timestamp)} 
-              </div>
-              <div>WOULD YOU RATHER</div>
-              </div>
-
-
-              <img 
-                src={author.avatarURL}
-                alt={`Avatar of ${author.name}`}
-                className='avatar'
+            <QuestionHeader 
+              name={author.name} 
+              timestamp={question.timestamp}
+              avatarURL={author.avatarURL}
               />
-              
-            </div> */}
-            
-            
+
             <div>{question.optionOne.text} OR...</div>
-          
           </div>
         </div>
       </Link>
