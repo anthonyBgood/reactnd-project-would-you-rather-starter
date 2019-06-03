@@ -9,21 +9,29 @@ render(){
 
   return(
     <div className='navBar'>
-      <ul>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
-        <li>
-          Play
-        </li>
-        <li>
-        <Link to='/new/'>Contribute</Link>
-        </li>
-        <li>
-        <Link to='/authenticate/'>Logout</Link>
-        </li>
+      <div className='menu'>
+        <Link to='/'>
+          <div className='menu-item'>
+            Home
+          </div>
+        </Link>
+
+          <div className='menu-item'>
+            Play
+          </div>
+          
+        <Link to='/new/'>
+          <div className='menu-item'>
+            Contribute
+          </div>
+        </Link>
+        <Link to='/authenticate/'>
+          <div className='menu-item'>
+            Logout
+          </div>
+        </Link>
         
-      </ul>
+      </div>
     </div>
   )
 }
