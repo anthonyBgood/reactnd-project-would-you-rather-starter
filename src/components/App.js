@@ -32,7 +32,7 @@ class App extends Component {
           
           <LoadingBar />
 
-          {
+{/*           {
             this.props.loading === true
             ? null
 
@@ -52,9 +52,27 @@ class App extends Component {
                 <Route path='/question/:id' component={Question}/>
                 <Route path='/leaderboard/' component={LeaderBoard}/>
 
-                {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> */}
+                {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> 
                 
                 </Fragment> 
+          }  */}
+
+          {
+            this.props.loading === true
+            ? null
+
+            : <Fragment>
+
+                <Nav/>
+                <Route path='/' exact component={Home} />
+                <Route path='/authenticate/' component={Introduction} />
+                <Route path='/new/' component={NewQuestion} />
+                <Route path='/question/:id' component={Question}/>
+                <Route path='/leaderboard/' component={LeaderBoard}/>
+
+                {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> */}
+                
+              </Fragment> 
           } 
           
         </div>

@@ -120,19 +120,35 @@
 }
 
 
-.question-wouldYouRather>div{
+.question-wouldYouRather-or{
   flex-grow: 1;
   margin: auto; 
   text-align: center;
 }
 
-.question-wouldYouRather>button{
+.question-wouldYouRather-options{
   flex-grow: 3;
   margin: auto; 
   text-align: center;
   height: 100px;
+  position: relative;
+  /*background: transparent; */
 }
 
+div.icon-positioning-1{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+div.icon-positioning-2{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.question-wouldYouRather-options i{
+  font-size:48px;
+  color:green;
+}
 
 .question-results{
   border: 1px solid black;

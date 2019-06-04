@@ -19,12 +19,12 @@ class Question extends Component {
       
     e.preventDefault()
     const optionPreference = e.target.name
-    const {dispatch, userAnswered, question , authedUser} =  this.props 
+    const {dispatch, authedUserResponse, question , authedUser} =  this.props 
 
     /* const info = { authedUser, qid: question.id , answer: optionPreference }
-    console.log('recordPreference: ',userAnswered, info)  */
+    console.log('recordPreference: ',authedUserResponse, info)  */
 
-    userAnswered
+    authedUserResponse
     ? alert("you have already voted in this poll")
     : dispatch(handlePreferenceRecord({ 
         authedUser, 
@@ -33,15 +33,87 @@ class Question extends Component {
 
   }
 
+
+  resultsSummary(option){
+
+    const { showResults, voteHistory, authedUserResponse } =  this.props 
+
+    
+    if(!showResults){
+      return
+    }
+    
+    let votes, totalVotes, pcFor, classVal, iconDiv
+
+    totalVotes = voteHistory.totalVotes
+
+    if(option === OPTION_ONE){
+      votes = voteHistory.option1Votes
+      pcFor = voteHistory.percentageOption1
+      classVal = 'icon-positioning-1'
+
+
+      iconDiv = null
+      if(authedUserResponse === OPTION_ONE){
+        iconDiv = (
+          <div className={classVal}>
+            <i className="far fa-thumbs-up"></i>
+          </div>
+        )
+      }
+      
+
+
+    }else{
+      votes = voteHistory.option2Votes
+      pcFor = voteHistory.percentageOption2
+      classVal = 'icon-positioning-2'
+
+      iconDiv = null
+      if(authedUserResponse === OPTION_TWO){
+        iconDiv = (
+          <div className={classVal}>
+            <i className="far fa-thumbs-up"></i>
+          </div>
+        )
+      }
+
+    }
+
+  return(
+
+    <div>
+      <div>
+        {votes} Votes of {totalVotes} ({pcFor}%)
+      </div>
+      {iconDiv}
+    </div>
+
+
+  )}
+
+
+      /*         <div>
+            <div>
+              {votes} Votes of {totalVotes} ({pcFor}%)
+            </div>
+            <div className={classVal}>
+              <i className="far fa-thumbs-up"></i>
+            </div>
+
+          </div> */
+
+
   render(){
 
     const {
-      id, 
+
       showResults , 
       question ,
       author ,
-      userAnswered ,
-      voteHistory ,
+      authedUserResponse ,
+      voteHistory , 
+      loggedIn , 
       
     } =  this.props 
 
@@ -49,17 +121,22 @@ class Question extends Component {
 
 
 
+
+
+    if(!(loggedIn)){
+      this.props.history.push('/authenticate/' )
+    }
+
+
+
     return (
 
       <div className='question-base-component'>
 
-
         {author !== null &&
 
-          
           <div>
            
-
             <QuestionHeader 
               name={author.name} 
               timestamp={question.timestamp}
@@ -69,45 +146,48 @@ class Question extends Component {
             <div className='question-wouldYouRather'>
 
               <button 
-                className='wouldYouRather-options'
+                disabled={showResults}
+                className='question-wouldYouRather-options'
                 name={OPTION_ONE} 
                 onClick={(e)=> this.recordPreference(e)}>
                 {question.optionOne.text}
+                {this.resultsSummary(OPTION_ONE)}
+
               </button>
-              <div className='wouldYouRather-or'> 
-               OR
-               </div>
+
+
+              <div className='question-wouldYouRather-or'> 
+               OR                
+              </div>
+
+
               <button                 
-                className='wouldYouRather-options'
+                disabled={showResults}
+                className='question-wouldYouRather-options'
                 name={OPTION_TWO}
                 onClick={(e)=> this.recordPreference(e)}>
                 {question.optionTwo.text}
-              </button>
+                {this.resultsSummary(OPTION_TWO)}
 
+              </button>
             </div>
-          
           </div>
 
         }
 
-
-        
-
-        <div className='question-results'> 
-          <div>
-            showResults: {showResults?'yes':'no'} 
-          </div>
-          <div>
-            percentage option1: {voteHistory.percentageOption1}
-          </div>
-          <div>
-            total votes: {voteHistory.totalVotes}
-          </div>
-          <div>
-            authedUser choice: {userAnswered}
-          </div>
-        </div>
-    
+            {/* 
+                    {showResults &&
+                      (
+                      <div className='question-results'> 
+                        <div>
+                          authedUserResponse: {authedUserResponse}
+                        </div>
+                        <div>
+                          total votes: {voteHistory.totalVotes}
+                        </div>
+                      </div>
+                      )}
+                */}
       </div>
     )
   }
@@ -117,61 +197,56 @@ class Question extends Component {
 function mapStateToProps({authedUser, users, questions},props){
 
   
-  //{id, showResults}
-  const { id, showResults } = props.match.params
-  
+  const { id } = props.match.params
   const question = questions[id]
 
-   //DEV: problems with seeking before state populated
-
   let author = null
-  let userAnswered = null
-  let userAnsweredQuestions = null
+  let authedUserResponse = null
+  let showResults =false
   let voteHistory ={}
 
+  if (question !==undefined){
 
-  if(authedUser !== null){
-
+    // the question's author details
     author = users[question.author]
-    userAnsweredQuestions = users[authedUser].answers
-    Object.keys(userAnsweredQuestions).includes(id) && (
-      userAnswered = userAnsweredQuestions[id]
-    )
 
+    // info from the authorised user
+    if(authedUser !== null){
 
+      Object.keys(users[authedUser].answers).includes(id) 
+      && 
+      (authedUserResponse = users[authedUser].answers[id])
+    }
+
+    (authedUserResponse) && (showResults=true)
+
+    // voting history results
     voteHistory.option1Votes = question.optionOne.votes.length
-    voteHistory.totalVotes =  voteHistory.option1Votes + question.optionTwo.votes.length
-    voteHistory.percentageOption1 = Math.round(
-        voteHistory.option1Votes === 0? 0 : 100 * voteHistory.option1Votes/voteHistory.totalVotes)
+    voteHistory.option2Votes = question.optionTwo.votes.length
 
-
-
-/*     console.group('questionProps :')
-      console.log( 'showResults : ',showResults)
-      console.log( 'question : ',question)
-      console.log( 'author : ',author)
-      console.log( 'userAnswered : ',userAnswered)
-      console.log( 'voteHistory : ',voteHistory)
-    console.groupEnd() */
-
+    // derived from the above two values...
+    voteHistory.totalVotes =  voteHistory.option1Votes + voteHistory.option2Votes
+    voteHistory.percentageOption1 = 
+      Math.round(
+        voteHistory.option1Votes === 0
+        ? 0 
+        : 100 * voteHistory.option1Votes/voteHistory.totalVotes)
+    voteHistory.percentageOption2 = 100 -voteHistory.percentageOption1
   }
-
 
   return(
     {
-      id ,
+
       showResults , 
       question ,
       author ,
-      userAnswered , 
+      authedUserResponse , 
       voteHistory , 
-      authedUser ,
+      authedUser , 
+      loggedIn: authedUser !== null ,
       
     }
   )
-
-
-
 }
 
 export default connect(mapStateToProps)(Question)

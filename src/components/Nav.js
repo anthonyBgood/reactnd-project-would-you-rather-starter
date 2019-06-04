@@ -9,12 +9,14 @@ class Nav extends Component {
 render(){
 
   const { authedUserRecord } = this.props
-  console.log('NAV TEST', authedUserRecord)
+  //console.log('NAV TEST', authedUserRecord)
+// removed because of error activeClassName='active'
+
 
   return(
     <div className='navBar'>
       <div className='menu'>
-        <Link to='/' activeClassName='active'>
+        <Link to='/' >
           <div className='menu-item'>
             Home
           </div>
@@ -27,7 +29,7 @@ render(){
           </div>
         </Link>
 
-        <Link to='/new/' activeClassName='active'>
+        <Link to='/new/' >
           <div className='menu-item'>
             Contribute
           </div>

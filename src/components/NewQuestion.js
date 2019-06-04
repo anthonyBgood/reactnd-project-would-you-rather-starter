@@ -19,19 +19,17 @@ class NewQuestion extends Component {
   handleChange = (e) => {
 
     const text = e.target.value
-    const name = e.target.name
+    const nameOfTheInputSource = e.target.name
     let newState = {}
-    newState[name]= text
+    newState[nameOfTheInputSource]= text
 
     this.setState(() => (newState))
 
   }
 
   handleSubmit = (e) =>{
-    //TODO: functionality for new question 
     
     e.preventDefault()
-
     const { dispatch, authedUser } = this.props
     const {optionOneText, optionTwoText} = this.state
 
@@ -51,9 +49,12 @@ class NewQuestion extends Component {
 
   render(){
 
-/*     if(toHome === true){
-      return <Redirect to='/' />
-    } */
+    // handle not logged in
+    if(!(this.props.loggedIn)){
+      this.props.history.push('/authenticate/' )
+    }
+
+
 
     return(
 
@@ -95,7 +96,10 @@ class NewQuestion extends Component {
 function mapStateToProps(state){
 
   const {authedUser } = state
-  return{authedUser}
+  return{
+    authedUser,
+    loggedIn: authedUser !== null , 
+  }
 }
 
 

@@ -13,7 +13,7 @@ class UserList extends Component{
       answersCount , 
       questionsCount ,
       score, 
-    } = this.props.user
+      } = this.props.user
 
     return(
 

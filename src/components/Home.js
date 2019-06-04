@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Question from '../components/Question'
 import QuestionList from '../components/QuestionList'
 
 

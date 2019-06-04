@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+
 import logo from '../styles/logo.svg';
 
 import { addAuthedUser, logOutAuthedUser } from '../actions/authedUser'
@@ -8,12 +10,18 @@ import { addAuthedUser, logOutAuthedUser } from '../actions/authedUser'
 
 class Introduction extends Component {
 
+    state = {
+      gotoNextAddress: false , 
+      nextAddress: null ,
+    }
 
   setAuthedUser = (e) =>{
 
     e.preventDefault()
     const id = e.target.value
     this.props.dispatch(addAuthedUser(id))
+    this.setState({ gotoNextAddress: true})
+
   }
 
   logoutUser = (e) =>{
@@ -23,11 +31,23 @@ class Introduction extends Component {
 
 
 
+
+
   render(){
 
     const {authedUser, authedUserRecord} = this.props
 
-
+    
+    // redirection after selection made
+    if(this.state.gotoNextAddress){
+      
+      return (
+        this.state.nextAddress
+        ?  <Redirect to={this.state.nextAddress}/>
+        :  <Redirect to='/'/>
+      )
+    } 
+   
     return(
 
       <div className="App">
