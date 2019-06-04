@@ -64,7 +64,9 @@ function mapStateToProps({authedUser, users, questions}){
     ))
 
   return {
-    questionsList
+    questionsList: questionsList.sort(
+      (a,b)=> questions[b.id].timestamp - questions[a.id].timestamp 
+    )
   }
 
 }

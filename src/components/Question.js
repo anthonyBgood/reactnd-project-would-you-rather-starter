@@ -10,8 +10,13 @@ class Question extends Component {
 
 
   formatDate (timestamp) {
+
+    // request a weekday along with a long date
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
     const d = new Date(timestamp)
-    return d.toLocaleDateString()
+    console.log('date: ',  d.toLocaleDateString('en-AU',options))
+    return d.toLocaleDateString('en-AU',options)
   }
 
 

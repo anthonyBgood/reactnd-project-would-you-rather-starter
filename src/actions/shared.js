@@ -5,8 +5,8 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 
 //DEV: change to login process
 import {addAuthedUser} from '../actions/authedUser'
-const AUTHED_ID = 'sarahedo' //tylermcginnis'
-//const AUTHED_ID = null
+//const AUTHED_ID = 'sarahedo' //tylermcginnis'
+const AUTHED_ID = null
 
 export function handleInitialData (users, questions){
   return(
