@@ -7,18 +7,13 @@ import QuestionHeader from '../components/QuestionHeader'
 
 class Question extends Component {
 
-
-
   formatDate (timestamp) {
 
-    // request a weekday along with a long date
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
-
     const d = new Date(timestamp)
-    console.log('date: ',  d.toLocaleDateString('en-AU',options))
     return d.toLocaleDateString('en-AU',options)
-  }
 
+  }
 
   recordPreference (e) {
       
@@ -26,9 +21,7 @@ class Question extends Component {
     const optionPreference = e.target.name
     const {dispatch, authedUserResponse, question , authedUser} =  this.props 
 
-    /* const info = { authedUser, qid: question.id , answer: optionPreference }
-    console.log('recordPreference: ',authedUserResponse, info)  */
-
+    //test if already responded before dispatching
     authedUserResponse
     ? alert("you have already voted in this poll")
     : dispatch(handlePreferenceRecord({ 
@@ -43,45 +36,44 @@ class Question extends Component {
 
     const { showResults, voteHistory, authedUserResponse } =  this.props 
 
-    
+    // show only if user has already answered the question
     if(!showResults){
       return
     }
     
+    
     let votes, totalVotes, pcFor, classVal, iconDiv
-
     totalVotes = voteHistory.totalVotes
+    iconDiv = null
 
+    // decide what values to return
     if(option === OPTION_ONE){
+
       votes = voteHistory.option1Votes
       pcFor = voteHistory.percentageOption1
       classVal = 'icon-positioning-1'
 
-
-      iconDiv = null
-      if(authedUserResponse === OPTION_ONE){
+      // populate icon if user selected
+      authedUserResponse === OPTION_ONE && (
         iconDiv = (
           <div className={classVal}>
             <i className="far fa-thumbs-up"></i>
           </div>
-        )
-      }
-      
-
+        ))
 
     }else{
+
       votes = voteHistory.option2Votes
       pcFor = voteHistory.percentageOption2
       classVal = 'icon-positioning-2'
 
-      iconDiv = null
-      if(authedUserResponse === OPTION_TWO){
+      // populate icon if user selected
+      authedUserResponse === OPTION_TWO && (
         iconDiv = (
           <div className={classVal}>
             <i className="far fa-thumbs-up"></i>
           </div>
-        )
-      }
+        ))
 
     }
 
@@ -94,19 +86,8 @@ class Question extends Component {
       {iconDiv}
     </div>
 
-
   )}
 
-
-      /*         <div>
-            <div>
-              {votes} Votes of {totalVotes} ({pcFor}%)
-            </div>
-            <div className={classVal}>
-              <i className="far fa-thumbs-up"></i>
-            </div>
-
-          </div> */
 
 
   render(){
@@ -116,23 +97,14 @@ class Question extends Component {
       showResults , 
       question ,
       author ,
-      authedUserResponse ,
-      voteHistory , 
       loggedIn , 
       
     } =  this.props 
 
 
-
-
-
-
-
     if(!(loggedIn)){
       this.props.history.push('/authenticate/' )
     }
-
-
 
     return (
 
@@ -177,22 +149,7 @@ class Question extends Component {
               </button>
             </div>
           </div>
-
         }
-
-            {/* 
-                    {showResults &&
-                      (
-                      <div className='question-results'> 
-                        <div>
-                          authedUserResponse: {authedUserResponse}
-                        </div>
-                        <div>
-                          total votes: {voteHistory.totalVotes}
-                        </div>
-                      </div>
-                      )}
-                */}
       </div>
     )
   }

@@ -29,7 +29,7 @@ render(){
           </div>
         </Link>
 
-        <Link to='/new/' >
+        <Link to='/add/' >
           <div className='menu-item'>
             Contribute
           </div>

@@ -3,7 +3,7 @@
 import '../styles/App.css';
 
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 
@@ -16,6 +16,7 @@ import Home from '../components/Home'
 import Question from '../components/Question'
 import NewQuestion from '../components/NewQuestion'
 import LeaderBoard from '../components/LeaderBoard'
+import NotFound from './NotFound'
 
 
 
@@ -32,31 +33,6 @@ class App extends Component {
           
           <LoadingBar />
 
-{/*           {
-            this.props.loading === true
-            ? null
-
-            :this.props.loggedIn !== true
-
-            ?<Fragment>
-                <Nav/>
-                <Introduction/>
-              </Fragment>
-
-            : <Fragment>
-
-                <Nav/>
-                <Route path='/' exact component={Home} />
-                <Route path='/authenticate/' component={Introduction} />
-                <Route path='/new/' component={NewQuestion} />
-                <Route path='/question/:id' component={Question}/>
-                <Route path='/leaderboard/' component={LeaderBoard}/>
-
-                {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> 
-                
-                </Fragment> 
-          }  */}
-
           {
             this.props.loading === true
             ? null
@@ -64,13 +40,16 @@ class App extends Component {
             : <Fragment>
 
                 <Nav/>
-                <Route path='/' exact component={Home} />
-                <Route path='/authenticate/' component={Introduction} />
-                <Route path='/new/' component={NewQuestion} />
-                <Route path='/question/:id' component={Question}/>
-                <Route path='/leaderboard/' component={LeaderBoard}/>
+                  <Switch>
+                    <Route path='/' exact component={Home} />
+                    <Route path='/authenticate/' component={Introduction} />
+                    <Route path='/add/' component={NewQuestion} />
+                    <Route path='/question/:id' component={Question}/>
+                    <Route path='/leaderboard/' component={LeaderBoard}/>
 
-                {/* <Question showResults ={true} id ={'vthrdm985a262al8qx3do'} /> */}
+                    <Route component={NotFound}/>
+                    
+                  </Switch>
                 
               </Fragment> 
           } 
