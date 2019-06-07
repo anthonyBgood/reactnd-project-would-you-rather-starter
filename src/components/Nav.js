@@ -37,19 +37,19 @@ render(){
         
         
       </div>
-      <div>
+      <div className='menu-right'>
       <Link to='/authenticate/'>
-          <div className='menu-item'>
+          <div className='user-display-holder'>
 
           {          
           authedUserRecord === undefined 
           ? 
+            <div className='logout'>
               <p> 
                 log in
               </p>
-
+            </div>
           :
-
             <div className='logout'>
               <p> 
                 {authedUserRecord.name}

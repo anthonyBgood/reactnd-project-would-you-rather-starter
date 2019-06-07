@@ -8,7 +8,6 @@ import {handleNewQuestion} from '../actions/questions'
 
 class NewQuestion extends Component {
 
-
   state ={
     
     optionOneText: '', 
@@ -47,14 +46,15 @@ class NewQuestion extends Component {
     
   }
 
-  render(){
+  componentDidMount(){
 
-    // handle not logged in
+    // get login before proceeding 
     if(!(this.props.loggedIn)){
-      this.props.history.push('/authenticate/' )
+      this.props.history.push('/authenticate/logInBeforeProceeding' )
     }
+  }
 
-
+  render(){
 
     return(
 

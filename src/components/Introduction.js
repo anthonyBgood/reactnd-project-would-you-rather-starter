@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+//import { Redirect } from 'react-router-dom'
 
 import logo from '../styles/logo.svg';
 
@@ -11,8 +11,8 @@ import { addAuthedUser, logOutAuthedUser } from '../actions/authedUser'
 class Introduction extends Component {
 
     state = {
-      gotoNextAddress: false , 
-      nextAddress: null ,
+      returnBackOne: false , 
+
     }
 
   setAuthedUser = (e) =>{
@@ -20,7 +20,13 @@ class Introduction extends Component {
     e.preventDefault()
     const id = e.target.value
     this.props.dispatch(addAuthedUser(id))
-    this.setState({ gotoNextAddress: true})
+    //this.setState({ gotoNextAddress: true})
+
+    if(this.state.returnBackOne){
+      this.props.history.goBack()
+    }else{
+      this.props.history.push('/')
+    }
 
   }
 
@@ -30,23 +36,27 @@ class Introduction extends Component {
   }
 
 
+  componentDidMount(){
+    // using react-router - if set to an address longer than the correct
+    // route for this page, this is a signal that authorisation
+    // is needed before undertaking an action, so setup to goBack(1)
 
+    const { match } = this.props
+    if(!match.isExact && !this.state.returnBackOne){
+  
+      this.setState(() => ({
+        returnBackOne: true
+      }))
+  
+    }
+  
+  }
 
 
   render(){
 
     const {authedUser, authedUserRecord} = this.props
 
-    
-    // redirection after selection made
-    if(this.state.gotoNextAddress){
-      
-      return (
-        this.state.nextAddress
-        ?  <Redirect to={this.state.nextAddress}/>
-        :  <Redirect to='/'/>
-      )
-    } 
    
     return(
 
@@ -56,10 +66,6 @@ class Introduction extends Component {
             <h2>
               Would you Rather?
             </h2>
-            <p className='Framework-declaration'>
-                React/Redux
-            </p>
-            <img src={logo} className="App-logo" alt="logo" />
 
             {
               authedUser === null
@@ -73,13 +79,14 @@ class Introduction extends Component {
                       onChange={(e)=> this.setAuthedUser(e)}
                       key={this.props.userIds} 
                       >
+                      <option value='0' >Select user:</option>
                       {
-                        this.props.userIds.map(
+                        this.props.userIds.map(                          
                           (id) =>(
-                            <option 
-                              
+                            <option                               
                               key={id} 
-                              value={[id]}>{id}</option>
+                              value={[id]}>{id}
+                            </option>
                           ))
                       }
                     </select>
@@ -96,12 +103,23 @@ class Introduction extends Component {
                     className='avatar-small'
                     /> 
                   </div>
-                  <button onClick={this.logoutUser}>
+                  <button onClick={this.logoutUser} className='user-log-out'>
                     Log Out
                   </button>
                 </div>
                 
             }
+
+
+
+
+
+            <p className='Framework-declaration'>
+                React/Redux
+            </p>
+            <img src={logo} className="App-logo" alt="logo" />
+
+
 
           </header>
         </div>

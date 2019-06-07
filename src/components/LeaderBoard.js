@@ -8,31 +8,23 @@ class LeaderBoard extends Component {
   render(){
 
     const { userList } = this.props
-    console.log('LEADERBOARD: ',userList)
 
     return(
       <div className='base-component'>
         <div>LeaderBoard</div>
         <div>
+          <ul className='question-list'>
+            {userList.map((user) =>(
+              
+              
+              <li key={user.id}>  
+                < UserList user= {user}  />
+              </li>
 
-
-        <ul className='question-list'>
-          {userList.map((user) =>(
-            
-            
-            <li key={user.id}>  
-              < UserList user= {user}  />
-            </li>
-
-          ))}
-        </ul>
-
+            ))}
+          </ul>
         </div>
-
-
-
       </div>
-
     )
   }
 }
@@ -44,13 +36,12 @@ function mapStateToProps({users}){
     const user = users[userId] 
     return({
 
-    
-    id: userId , 
-    name: user.name ,
-    avatarURL: user.avatarURL ,
-    answersCount: Object.keys(user.answers).length , 
-    questionsCount: user.questions.length ,
-    score:  (Object.keys(user.answers).length) + (user.questions.length)
+      id: userId , 
+      name: user.name ,
+      avatarURL: user.avatarURL ,
+      answersCount: Object.keys(user.answers).length , 
+      questionsCount: user.questions.length ,
+      score:  (Object.keys(user.answers).length) + (user.questions.length)
 
   })})
 

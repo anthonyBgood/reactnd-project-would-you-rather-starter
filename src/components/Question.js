@@ -88,23 +88,21 @@ class Question extends Component {
 
   )}
 
+  componentDidMount(){
 
+    // get login before proceeding 
+    if(!(this.props.loggedIn)){
+      this.props.history.push('/authenticate/logInBeforeProceeding' )
+    }
+  }
 
   render(){
 
     const {
-
       showResults , 
       question ,
       author ,
-      loggedIn , 
-      
     } =  this.props 
-
-
-    if(!(loggedIn)){
-      this.props.history.push('/authenticate/' )
-    }
 
     return (
 
