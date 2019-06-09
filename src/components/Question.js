@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import {OPTION_ONE, OPTION_TWO, handlePreferenceRecord} from '../actions/questions'
 import QuestionHeader from '../components/QuestionHeader'
@@ -90,7 +91,6 @@ class Question extends Component {
 
   componentDidMount(){
 
-    // get login before proceeding 
     if(!(this.props.loggedIn)){
       this.props.history.push('/authenticate/logInBeforeProceeding' )
     }
@@ -102,52 +102,64 @@ class Question extends Component {
       showResults , 
       question ,
       author ,
+      questionNotFound ,
     } =  this.props 
+
+    
+
+    // question id is an error
+    if (questionNotFound){
+      return (
+        <Redirect to='/NotFound/' />
+      )
+    }
+
 
     return (
 
       <div className='question-base-component'>
+        <div>
+          
+          <QuestionHeader 
+            name={author.name} 
+            timestamp={question.timestamp}
+            avatarURL={author.avatarURL}
+            />
 
-        {author !== null &&
+          <div className='question-wouldYouRather'>
 
-          <div>
-           
-            <QuestionHeader 
-              name={author.name} 
-              timestamp={question.timestamp}
-              avatarURL={author.avatarURL}
-              />
+            <button 
+              className='question-wouldYouRather-options'
+              disabled={showResults}
+              name={OPTION_ONE} 
+              onClick={(e)=> this.recordPreference(e)}>
+              {question.optionOne.text}
+              
+              {// show results
+              this.resultsSummary(OPTION_ONE)}
 
-            <div className='question-wouldYouRather'>
-
-              <button 
-                disabled={showResults}
-                className='question-wouldYouRather-options'
-                name={OPTION_ONE} 
-                onClick={(e)=> this.recordPreference(e)}>
-                {question.optionOne.text}
-                {this.resultsSummary(OPTION_ONE)}
-
-              </button>
-
-
-              <div className='question-wouldYouRather-or'> 
-               OR                
-              </div>
+            </button>
 
 
-              <button                 
-                disabled={showResults}
-                className='question-wouldYouRather-options'
-                name={OPTION_TWO}
-                onClick={(e)=> this.recordPreference(e)}>
-                {question.optionTwo.text}
-                {this.resultsSummary(OPTION_TWO)}
-
-              </button>
+            <div className='question-wouldYouRather-or'> 
+              OR                
             </div>
+
+
+            <button                 
+              className='question-wouldYouRather-options'
+              disabled={showResults}
+              name={OPTION_TWO}
+              onClick={(e)=> this.recordPreference(e)}>
+              {question.optionTwo.text}
+
+              {// show results
+              this.resultsSummary(OPTION_TWO)}
+
+            </button>
+
           </div>
-        }
+        </div>
       </div>
     )
   }
@@ -204,7 +216,8 @@ function mapStateToProps({authedUser, users, questions},props){
       voteHistory , 
       authedUser , 
       loggedIn: authedUser !== null ,
-      
+      questionNotFound: question === undefined ,
+
     }
   )
 }
